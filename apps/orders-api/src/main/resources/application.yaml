@@ -1,0 +1,34 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  application:
+    name: orders-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/orderflow}
+    username: ${DATABASE_USERNAME:orderflow}
+    password: ${DATABASE_PASSWORD:}
+  flyway:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: when_authorized
+orderflow:
+  pricing:
+    url: ${PRICING_URL:http://localhost:8081}
+    connect-timeout-ms: 2000
+    read-timeout-ms: 3000
+  receipts:
+    store: ${RECEIPT_STORE:local}
+    local-dir: ${RECEIPT_DIR:./receipts}
+    bucket: ${RECEIPT_BUCKET:}
+    prefix: ${RECEIPT_PREFIX:receipts/}
+    poll-ms: 5000
+app:
+  version: ${APP_VERSION:0.1.0}

@@ -1,0 +1,17 @@
+server:
+  port: ${SERVER_PORT:8081}
+spring:
+  application:
+    name: pricing-api
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+info:
+  app:
+    version: ${APP_VERSION:0.1.0}
